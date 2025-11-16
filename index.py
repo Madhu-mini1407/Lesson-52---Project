@@ -1,20 +1,36 @@
-from tkinter import *
+import tkinter as tk
+import random
 
-window = Tk()
+def generate_password():
+    characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' + '0123456789' + '!@#$%^&*()_+-=[]{}|;:,.<>/?'
+    password_length = 12
+    password = ''.join(random.choice(characters) for i in range(password_length))
+    entry.delete(0, tk.END) 
+    entry.insert(0, password)
+
+window = tk.Tk()
 window.title('Random Password Generator')
-window.geometry('300x150')
+window.geometry('400x120') 
+window.resizable(False, False)
 
-entry = Entry(fg="yellow", bg="blue", width=50, justify='center') 
-entry.pack(pady=10)
+entry = tk.Entry(
+    window, 
+    fg="yellow", 
+    bg="blue", 
+    width=50, 
+    justify='center',
+    font=('Arial', 10, 'bold')
+) 
+entry.pack(pady=20, padx=10)
+entry.insert(0, "Click 'GENERATE' to create your secret keeper.")
 
-button = Button(
-    text="Click me to create a new secret keeper!", 
+button = tk.Button(
+    window, 
+    text="GENERATE", 
     fg='white', 
-    bg='black'
+    bg='black',
+    command=generate_password 
 )
 button.pack(pady=5)
-
-greeting = Label(text="Password is below \n 244466666", fg='black', bg='white')
-greeting.pack()
 
 window.mainloop()
